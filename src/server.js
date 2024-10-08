@@ -4,7 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import morgan from "morgan";
-// import { routers } from "./routers/index.js";
+import { routers } from "./routers/index.js";
 import { connectDB } from "./configs/connectDb.js";
 import { corsOptions } from "./configs/cors.js";
 
@@ -20,11 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
 
-// app.use("/user", routers.user);
-// app.use("/genre", routers.genre);
-// app.use("/artist", routers.artist);
-// app.use("/song", routers.song);
-// app.use("/postCard", routers.postCard);
+app.use("/user", routers.user);
 
 app.all("*", (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on the server`);
