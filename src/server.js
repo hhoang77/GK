@@ -21,6 +21,8 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use("/user", routers.user);
+app.use("/category", routers.category);
+app.use("/product", routers.product);
 
 app.all("*", (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on the server`);
