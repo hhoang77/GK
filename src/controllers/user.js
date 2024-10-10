@@ -35,16 +35,15 @@ const getAllUser = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const { accesstoken, refreshToken, user } = userServices.login({
+    const user = await userServices.login({
       email,
       password,
     });
+
     return res.status(StatusCodes.OK).json({
       status: 200,
       message: "Xử lý thành công",
       content: user,
-      accesstoken,
-      refreshToken,
     });
   } catch (error) {
     console.log(error);

@@ -1,7 +1,19 @@
 import ProductModel from "../models/product.js";
 
 const getAllProduct = async () => {
-  return await ProductModel.find();
+  return await ProductModel.find().populate("categoryId");
+};
+
+const getProductById = async (id) => {
+  try {
+    const product = await ProductModel.findById(id).populate("categoryId");
+    if (!product) {
+      throw Error("Product Not Found");
+    }
+    return await product;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const createProduct = async ({ name, price, image, categoryId }) => {
@@ -42,6 +54,7 @@ const deleteProduct = async (id) => {
 
 export const productServices = {
   getAllProduct,
+  getProductById,
   createProduct,
   updateProduct,
   deleteProduct,

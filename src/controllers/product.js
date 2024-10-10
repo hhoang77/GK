@@ -15,6 +15,22 @@ const getAllProduct = async (req, res, next) => {
   }
 };
 
+const getProductById = async (req, res, next) => {
+  try {
+    const id = req.query.id;
+    const product = await productServices.getProductById(id);
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: product });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ status: 500, message: "Server" });
+  }
+};
+
 const createProduct = async (req, res, next) => {
   try {
     const { name, price, image, categoryId } = req.body;
@@ -75,6 +91,7 @@ const deleteProduct = async (req, res, next) => {
 
 export const productControllers = {
   getAllProduct,
+  getProductById,
   createProduct,
   updateProduct,
   deleteProduct,

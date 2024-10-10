@@ -5,6 +5,7 @@ import uploadCloud from "../middlewares/cloudinary.js";
 const router = express.Router();
 
 router.route("/").get(productControllers.getAllProduct);
+router.route("/getById").get(productControllers.getProductById);
 router
   .route("/create")
   .post(uploadCloud.single("image"), productControllers.createProduct);

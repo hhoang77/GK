@@ -19,7 +19,7 @@ const register = async ({ name, email, password }) => {
     const hashpassword = await hashPassword(password);
     return await UserModel.create({
       email,
-      username,
+      name,
       password: hashpassword,
     });
   } catch (error) {
@@ -38,7 +38,10 @@ const login = async ({ email, password }) => {
       throw Error("Password Not Match");
     }
     const { accessToken, refreshToken } = generateToken(user?.id);
-    return { accessToken, refreshToken, user };
+    // console.log(user);
+    console.log(accessToken, refreshToken);
+
+    return user;
   } catch (error) {
     console.log(error);
   }
